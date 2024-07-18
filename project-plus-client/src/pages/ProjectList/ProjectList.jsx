@@ -1,4 +1,4 @@
-import ProjectCard from "@/components/Home/ProjectCard";
+import ProjectCard from "@/components/Project/ProjectCard";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -24,7 +24,7 @@ const categories = [
   "Android",
   "Desktop",
   "Other",
-];
+]
 const tags = [
   "All",
   "HTML",
@@ -36,7 +36,7 @@ const tags = [
   "Kotlin",
   "PHP",
   "Rust",
-];
+]
 
 function ProjectList() {
   const [searchKey, setSearchKey] = useState("");
@@ -88,27 +88,27 @@ function ProjectList() {
                 </div>
                 <div>
                   <h1 className="pb-3 text-gray-500 font-medium">Tags</h1>
-                </div>
                 <Select
                   defaultValue="all"
                   onValueChange={(value) => handleFilterChange("tags", value)}
                   className="w-[100%]"
-                >
+                  >
                   <SelectTrigger>
                     <SelectValue placeholder="None" />
                   </SelectTrigger>
                   <SelectContent>
                     {tags.map((tag, ind) => (
                       <SelectItem
-                        className="focus:bg-primary focus:text-white"
-                        value={tag.toLowerCase()}
-                        key={ind}
+                      className="focus:bg-primary focus:text-white"
+                      value={tag.toLowerCase()}
+                      key={ind}
                       >
                         {tag}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
+                </div>
               </div>
             </CardContent>
           </Card>

@@ -32,6 +32,11 @@
     --chart-5: ;
   }
 
+  .placeholder-color::placeholder {
+    color: #0052bc; /* Change this color as needed */
+    opacity: 0.5; /* Optional: this makes sure the color is not transparent */
+  }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -59,6 +64,7 @@
     --chart-5: ;
   }
 }
+
 
 
 @layer base {
