@@ -1,9 +1,9 @@
 import InviteUserForm from "@/components/ProjectDetails/InviteUserForm"
-import MembersTable from "@/components/ProjectDetails/MembersTable"
+import MembersTable from "@/components/ProjectDetails/MembersList"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogOverlay, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { PlusIcon } from "@radix-ui/react-icons"
 
@@ -44,21 +44,24 @@ function ProjectDetails() {
                       </Avatar>
                     )
                   }
-                  <Avatar className="cursor-pointer ">
-                        <AvatarImage src="" alt="@shadcn" />
-                        <AvatarFallback>{users.length-2}+</AvatarFallback>
-                      </Avatar>                   
-                  {/* <Dialog>
+                  <Dialog>
                     <DialogTrigger>
                       <DialogClose>
+                      <Avatar className="cursor-pointer ">
+                            <AvatarImage src="" alt="@shadcn" />
+                            <AvatarFallback>{users.length-2}+</AvatarFallback>
+                          </Avatar>                   
                       </DialogClose>
                     </DialogTrigger>
-                    <DialogContent>
-                      <DialogTitle>Project members:</DialogTitle>
-                      <MembersTable users={users}/>
-                      <DialogDescription>All the project users are listed here</DialogDescription>
-                    </DialogContent>
-                  </Dialog> */}
+                    <DialogOverlay>
+                      <DialogContent>
+                        <DialogTitle>Project members:</DialogTitle>
+                        <MembersTable users={users}/>
+                        <DialogDescription>All the project users are listed here</DialogDescription>
+                      </DialogContent>
+                    </DialogOverlay>
+                    
+                  </Dialog>
                 </div>
                 <div>
                   <Dialog>
