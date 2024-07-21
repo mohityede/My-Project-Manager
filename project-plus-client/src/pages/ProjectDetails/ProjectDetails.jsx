@@ -105,12 +105,11 @@ function ProjectDetails() {
             <div className="lg:flex md:flex gap-3 justify-between py-5">
               <IssueList status="pending" title="Todo List"/>
               <IssueList status="in_progress" title="In Progress"/>
-              <IssueList status="completed" title="Done"/>
-              
+              <IssueList status="completed" title="Done"/>              
             </div>
           </section>
         </ScrollArea>
-        <div>
+        <div className="lg:w-[30%] rounded-md sticky right-5 top-10">
           <ChatBox/>
         </div>
       </div>
