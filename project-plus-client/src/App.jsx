@@ -3,6 +3,7 @@ import './App.css'
 import Home from './pages/Home/Home'
 import Navbar from './components/Navbar/Navbar'
 import ProjectDetails from './pages/ProjectDetails/ProjectDetails'
+import TaskDetails from './pages/TaskDetails/TaskDetails'
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path='/project/:id' element={<ProjectDetails/>} />
+        <Route path="/project/:projectId/task/:taskId" element={<TaskDetails/>} />
       </Routes>
     </BrowserRouter>
     </>

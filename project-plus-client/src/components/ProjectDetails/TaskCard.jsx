@@ -4,15 +4,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSubTrigger, DropdownMenuTrigger } from "../ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import UserList from "./UserList"
+import { useNavigate } from "react-router-dom"
 
 function TaskCard() {
-
+  const navigate= useNavigate()
     return (
       <>
       <Card className="rounded-md py-1 hover:border-primary pb-2">
         <CardHeader className="py-0 pb-1">
           <div className="flex justify-between items-center">
-            <CardTitle>
+            <CardTitle className="cursor-pointer" onClick={()=>navigate("/project/3/task/4")}>
                 Setup Project
             </CardTitle>
             <DropdownMenu>

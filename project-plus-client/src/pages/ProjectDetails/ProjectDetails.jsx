@@ -1,6 +1,6 @@
 import ChatBox from "@/components/ProjectDetails/ChatBox"
 import InviteUserForm from "@/components/ProjectDetails/InviteUserForm"
-import IssueList from "@/components/ProjectDetails/TaskList"
+import TaskList from "@/components/ProjectDetails/TaskList"
 import MembersTable from "@/components/ProjectDetails/MembersList"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
@@ -103,9 +103,9 @@ function ProjectDetails() {
           <section>
             <span className="py-5 border-b text-xl font-mono">Task</span>
             <div className="lg:flex md:flex gap-3 justify-between py-5">
-              <IssueList status="pending" title="Todo List"/>
-              <IssueList status="in_progress" title="In Progress"/>
-              <IssueList status="completed" title="Done"/>              
+              <TaskList status="pending" title="Todo List"/>
+              <TaskList status="in_progress" title="In Progress"/>
+              <TaskList status="completed" title="Done"/>              
             </div>
           </section>
         </ScrollArea>
