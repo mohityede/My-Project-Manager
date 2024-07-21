@@ -29,7 +29,7 @@ function TaskList({ status, title }) {
             <CardContent className="px-2">
               <div className="space-y-2">
                 {
-                  [1,2,3,4,5,6,7].map((card)=>
+                  [1,2,3].map((card)=>
                     <TaskCard key={card} />
                   )
                 }
