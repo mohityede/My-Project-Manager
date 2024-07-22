@@ -38,7 +38,7 @@ function Navbar() {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                    <DropdownMenuItem className="justify-around focus:bg-primary focus:text-white">
+                    <DropdownMenuItem onClick={()=> navigate("/upgrade")} className="justify-around focus:bg-primary focus:text-white">
                         Upgrade+ <DoubleArrowUpIcon/>
                     </DropdownMenuItem>
                     <DropdownMenuItem className="justify-around focus:bg-primary focus:text-white">

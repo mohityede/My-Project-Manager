@@ -32,7 +32,7 @@ function CreateCommentForm({ taskId }) {
 											<Input
 												{...field}
 												type="text"
-												className="md:w-[20rem] border border-primary"
+												className="md:w-[20rem] border border-primary bg-white"
 												placeholder="comment..."
 											/>
 										</FormControl>

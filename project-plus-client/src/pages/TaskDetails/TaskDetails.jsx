@@ -19,7 +19,7 @@ function TaskDetails() {
 					<ScrollArea className="h-[80vh] w-[60%]"> */}
       <div className="m-5 lg:px-10">
         <div className="lg:flex gap-5 justify-between pb-4">
-          <ScrollArea className="h-screen lg:w-[69%] pr-2 mb-5">
+          <ScrollArea className="h-screen lg:w-[69%] pr-2 bg-white p-5 rounded-md mb-5">
             <div>
               <h1 className="text-2xl font-mono font-bold">Task Title</h1>
               <div className="py-5">
@@ -56,7 +56,7 @@ function TaskDetails() {
           </ScrollArea>
           <div className="lg:w-[30%] w-full space-y-2">
 						<Select onValueChange={updateTaskStatus}>
-						<SelectTrigger className="w-[180px] border border-primary">
+						<SelectTrigger className="w-[180px] border border-primary bg-white">
         <SelectValue placeholder="To Do" />
       </SelectTrigger>
 						<SelectContent>    
@@ -65,7 +65,7 @@ function TaskDetails() {
           <SelectItem value="completed" className="focus:bg-primary focus:text-white">Done</SelectItem>
       </SelectContent>
 						</Select>
-						<div className="border border-black rounded-lg">
+						<div className="border border-black rounded-lg bg-white">
 							<p className="border border-b-black py-3 font-mono text-lg px-5">Details</p>
 								<div className="p-5">
 									<div className="space-y-7">
