@@ -1,4 +1,6 @@
+import ChatBox from "@/components/ProjectDetails/ChatBox"
 import InviteUserForm from "@/components/ProjectDetails/InviteUserForm"
+import TaskList from "@/components/ProjectDetails/TaskList"
 import MembersTable from "@/components/ProjectDetails/MembersList"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
@@ -82,10 +84,7 @@ function ProjectDetails() {
                 </div>
               </div>
               <div className="flex">
-                <span className="w-36">Status:</span>
-                {
-                  projectStatus==="Planning" && (<Badge className="bg-green-600">{projectStatus}</Badge>)
-                }
+                <span className="w-36">Status:</span>                
                 {
                   projectStatus==="In Progress" && (<Badge className="bg-yellow-600">{projectStatus}</Badge>)
                 }
@@ -98,7 +97,18 @@ function ProjectDetails() {
               </div>
             </div>
           </div>
+          <section>
+            <span className="py-5 border-b text-xl font-mono">Task</span>
+            <div className="lg:flex md:flex gap-3 justify-between py-5">
+              <TaskList status="pending" title="Todo List"/>
+              <TaskList status="in_progress" title="In Progress"/>
+              <TaskList status="completed" title="Done"/>              
+            </div>
+          </section>
         </ScrollArea>
+        <div className="lg:w-[30%] rounded-md sticky right-5 top-10">
+          <ChatBox/>
+        </div>
       </div>
     </div>
     </>
