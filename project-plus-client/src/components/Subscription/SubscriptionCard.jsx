@@ -12,7 +12,7 @@ function SubscriptionCard({data}){
             </p>
             {
                 data.planType==="Annual Paid Plan" &&
-                <span>25% Off</span>
+                <span className="text-green-400 font-bold">25% Off</span>
             }
             <Button className="w-full bg-white text-primary hover:text-white hover:border-white hover:border">
                 {data.buttonName}
