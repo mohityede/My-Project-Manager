@@ -84,10 +84,7 @@ function ProjectDetails() {
                 </div>
               </div>
               <div className="flex">
-                <span className="w-36">Status:</span>
-                {
-                  projectStatus==="Planning" && (<Badge className="bg-green-600">{projectStatus}</Badge>)
-                }
+                <span className="w-36">Status:</span>                
                 {
                   projectStatus==="In Progress" && (<Badge className="bg-yellow-600">{projectStatus}</Badge>)
                 }
