@@ -22,13 +22,13 @@ import java.util.Collections;
 @EnableWebSecurity
 public class SecurityConfig {
     @Autowired
-    private JwtValidator jwtValidator;
+    private JwtFilter jwtFilter;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.sessionManagement(Management ->Management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(Authorize ->Authorize.requestMatchers("/api/v1/**")
                         .authenticated().anyRequest().permitAll())
-                .addFilterBefore(jwtValidator, BasicAuthenticationFilter.class)
+                .addFilterBefore(jwtFilter, BasicAuthenticationFilter.class)
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(cors->cors.configurationSource(corsConfigSource()));
         return http.build();
