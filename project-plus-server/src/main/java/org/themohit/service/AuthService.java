@@ -18,6 +18,8 @@ import org.themohit.request.LoginReq;
 import org.themohit.response.AuthResponse;
 import org.themohit.utils.JwtUtils;
 
+import java.util.Optional;
+
 @Service
 public class AuthService {
     @Autowired
@@ -30,8 +32,8 @@ public class AuthService {
     private CustomUserDetails customUserDetails;
 
     public ResponseEntity<AuthResponse> createNewUser(User user) throws Exception{
-        User dbUser= userRepo.findByEmail(user.getEmail());
-        if(dbUser!=null) throw new InternalAuthenticationServiceException("User Already Exist with email");
+        Optional<User> dbUser= userRepo.findByEmail(user.getEmail());
+        if(!dbUser.isEmpty()) throw new InternalAuthenticationServiceException("User Already Exist with email");
 
         User newUser=new User();
         newUser.setEmail(user.getEmail());

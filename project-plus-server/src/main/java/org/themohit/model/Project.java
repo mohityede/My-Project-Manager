@@ -23,7 +23,7 @@ public class Project {
     private List<User> members=new ArrayList<>();
 
     @ManyToOne
-    private User createdBy;
+    private User owner;
 
     @JsonIgnore
     @OneToOne(mappedBy = "project",cascade = CascadeType.ALL,orphanRemoval = true)
