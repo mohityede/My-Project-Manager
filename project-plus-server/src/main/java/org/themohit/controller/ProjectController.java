@@ -6,11 +6,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.themohit.config.ConfigConstants;
 import org.themohit.model.Chat;
+import org.themohit.model.Invitation;
 import org.themohit.model.Project;
 import org.themohit.model.User;
+import org.themohit.request.InvitationRequest;
 import org.themohit.response.MassageResponse;
 import org.themohit.service.ProjectService;
 import org.themohit.service.UserService;
+import org.themohit.service.invitation.InvitationService;
 
 import java.util.List;
 
@@ -22,6 +25,9 @@ public class ProjectController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private InvitationService invitationService;
 
     @GetMapping("")
     public ResponseEntity<List<Project>> getProjects(
@@ -94,5 +100,27 @@ public class ProjectController {
         User user= userService.getUserProfileByJwt(jwt);
         Chat chat=projectService.getChat(projectId);
         return new ResponseEntity<>(chat,HttpStatus.OK);
+    }
+
+    @PostMapping("/invite")
+    public ResponseEntity<MassageResponse> inviteProject(
+            @RequestBody InvitationRequest inviteReq,
+            @RequestHeader(ConfigConstants.JWT_HEADER) String jwt
+    ) throws Exception {
+        User user= userService.getUserProfileByJwt(jwt);
+        invitationService.sendInvitation(inviteReq.getEmail(),inviteReq.getProjectId());
+        MassageResponse res=new MassageResponse("User Invitation send!");
+        return new ResponseEntity<>(res,HttpStatus.OK);
+    }
+
+    @GetMapping("/invite/accept")
+    public ResponseEntity<Invitation> acceptInvitation(
+            @RequestParam String token,
+            @RequestHeader(ConfigConstants.JWT_HEADER) String jwt
+    ) throws Exception {
+        User user= userService.getUserProfileByJwt(jwt);
+        Invitation invitation=invitationService.acceptInvitation(token,user.getId());
+        projectService.addUser(invitation.getProjectId(),user.getId());
+        return new ResponseEntity<>(invitation,HttpStatus.ACCEPTED);
     }
 }
