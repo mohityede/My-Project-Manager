@@ -12,12 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface ProjectRepo extends JpaRepository<Project,Long> {
-//    Optional<List<Project>> findByOwner(User user);
-
     Optional<List<Project>> findByNameContainingAndMembersContains(String partialName,User user);
-
-//    @Query("select p from project p join p.members m where m=:user")
-//    Optional<List<Project>> findProjectByMembers(@Param("user") User user);
 
     Optional<List<Project>> findByMembersContainingOrOwner(User user,User owner);
 }
