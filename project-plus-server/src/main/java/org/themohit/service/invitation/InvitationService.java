@@ -27,7 +27,7 @@ public class InvitationService {
 
         invitationRepo.save(invitation);
 
-        String invitationLink="http://localhost:5173/accept_invitation?token="+invitationToken;
+        String invitationLink="http://localhost:8080/api/v1/project/invite/accept?token="+invitationToken;
 
         emailService.sendEmailWithToken(email,invitationLink);
     }

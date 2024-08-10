@@ -30,7 +30,7 @@ public class ProjectController {
     private InvitationService invitationService;
 
     @GetMapping("")
-    public ResponseEntity<List<Project>> getProjects(
+    public ResponseEntity<List<Project>> getMyProjects(
             @RequestParam(required = false) String category,
             @RequestParam(required = false) String tags,
             @RequestHeader(ConfigConstants.JWT_HEADER) String jwt
