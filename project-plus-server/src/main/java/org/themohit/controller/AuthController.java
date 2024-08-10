@@ -1,6 +1,7 @@
 package org.themohit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,11 +20,13 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> registerUser(@RequestBody User user) throws Exception{
-        return authService.createNewUser(user);
+        AuthResponse authRes=authService.createNewUser(user);
+        return new ResponseEntity<>(authRes, HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> loginUser(@RequestBody LoginReq loginReq){
-        return authService.loginUser(loginReq);
+        AuthResponse authRes= authService.loginUser(loginReq);
+        return new ResponseEntity<>(authRes,HttpStatus.OK);
     }
 }

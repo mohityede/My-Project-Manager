@@ -23,6 +23,7 @@ import java.util.Collections;
 public class SecurityConfig {
     @Autowired
     private JwtFilter jwtFilter;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.sessionManagement(Management ->Management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

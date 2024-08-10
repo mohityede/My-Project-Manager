@@ -20,7 +20,7 @@ public class CustomUserDetails implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // our created User
-        org.themohit.model.User myUser= userRepository.findByEmail(username);
+        org.themohit.model.User myUser= userRepository.findByEmail(username).get();
         if(myUser==null)
             throw new UsernameNotFoundException("User not found with email "+username);
         List<GrantedAuthority> authorities=new ArrayList<>();

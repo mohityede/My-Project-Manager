@@ -1,8 +1,6 @@
 package org.themohit.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,6 +16,8 @@ import org.themohit.request.LoginReq;
 import org.themohit.response.AuthResponse;
 import org.themohit.utils.JwtUtils;
 
+import java.util.Optional;
+
 @Service
 public class AuthService {
     @Autowired
@@ -29,9 +29,9 @@ public class AuthService {
     @Autowired
     private CustomUserDetails customUserDetails;
 
-    public ResponseEntity<AuthResponse> createNewUser(User user) throws Exception{
-        User dbUser= userRepo.findByEmail(user.getEmail());
-        if(dbUser!=null) throw new InternalAuthenticationServiceException("User Already Exist with email");
+    public AuthResponse createNewUser(User user) throws Exception{
+        Optional<User> dbUser= userRepo.findByEmail(user.getEmail());
+        if(!dbUser.isEmpty()) throw new InternalAuthenticationServiceException("User Already Exist with email");
 
         User newUser=new User();
         newUser.setEmail(user.getEmail());
@@ -45,10 +45,10 @@ public class AuthService {
 
         AuthResponse res=new AuthResponse("Signup successfully!",jwt);
 
-        return new ResponseEntity<>(res,HttpStatus.CREATED);
+        return res;
     }
 
-    public ResponseEntity<AuthResponse> loginUser(LoginReq loginReq) {
+    public AuthResponse loginUser(LoginReq loginReq) {
         String username=loginReq.getEmail();
         String password=loginReq.getPassword();
 
@@ -58,7 +58,7 @@ public class AuthService {
 
         AuthResponse res=new AuthResponse("Login success!",jwt);
 
-        return new ResponseEntity<>(res,HttpStatus.OK);
+        return res;
     }
 
     private Authentication authenticate(String username, String password) {
