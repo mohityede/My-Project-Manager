@@ -35,7 +35,6 @@ public class Task {
     @ManyToOne
     private Project project;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "task",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Comment> comments=new ArrayList<>();
 }

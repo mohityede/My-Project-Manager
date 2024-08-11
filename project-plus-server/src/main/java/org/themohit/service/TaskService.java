@@ -3,6 +3,7 @@ package org.themohit.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.themohit.exception.TaskException;
+import org.themohit.model.Comment;
 import org.themohit.model.Project;
 import org.themohit.model.Task;
 import org.themohit.model.User;
@@ -87,5 +88,10 @@ public class TaskService {
         task.setStatus(status);
 
         return taskRepo.save(task);
+    }
+
+    public void addComment(Comment comment,Task task) {
+        task.getComments().add(comment);
+        taskRepo.save(task);
     }
 }
