@@ -20,7 +20,6 @@ public class Chat {
     @OneToOne
     private Project project;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "chat",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Message> messages = new ArrayList<>();
 
