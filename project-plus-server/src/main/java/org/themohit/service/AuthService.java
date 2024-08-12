@@ -29,6 +29,9 @@ public class AuthService {
     @Autowired
     private CustomUserDetails customUserDetails;
 
+    @Autowired
+    private SubscriptionService subscriptionService;
+
     public AuthResponse createNewUser(User user) throws Exception{
         Optional<User> dbUser= userRepo.findByEmail(user.getEmail());
         if(!dbUser.isEmpty()) throw new InternalAuthenticationServiceException("User Already Exist with email");
@@ -38,6 +41,8 @@ public class AuthService {
         newUser.setFullName(user.getFullName());
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         User savedUser=userRepo.save(newUser);
+
+        subscriptionService.createSubscription(savedUser);
 
         Authentication authentication=new UsernamePasswordAuthenticationToken(user.getEmail(),user.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);
