@@ -49,18 +49,8 @@ public class SubscriptionService {
         Subscription subscription=subscriptionRepo.findByUserId(userId);
         if(subscription==null) throw new SubscriptionException("Invalid user Id");
 
-        Plan planType;
-        try{
-            planType=Plan.valueOf(plan.toUpperCase());
-        }catch (Exception ex){
-            throw new SubscriptionException("Invalid Plan Type");
-        }
-
-        LocalDate planEndDate=LocalDate.now();
-        if(planType.equals(Plan.ANNUAL))
-            planEndDate = LocalDate.now().plusMonths(12);
-        if(planType.equals(Plan.MONTHLY))
-            planEndDate = LocalDate.now().plusMonths(1);
+        Plan planType= getPlanTypeFromString(plan);
+        LocalDate planEndDate= getPlanEndDateByPlan(planType);
 
         subscription.setPlanType(planType);
         subscription.setSubscriptionStartDate(LocalDate.now());
@@ -74,5 +64,25 @@ public class SubscriptionService {
         LocalDate endDate=subscription.getSubscriptionEndDate();
         LocalDate today=LocalDate.now();
         return today.isBefore(endDate) || today.isEqual(endDate);
+    }
+
+    private LocalDate getPlanEndDateByPlan(Plan planType){
+        LocalDate planEndDate=LocalDate.now();
+        if(planType.equals(Plan.ANNUAL))
+            planEndDate = LocalDate.now().plusMonths(12);
+        if(planType.equals(Plan.MONTHLY))
+            planEndDate = LocalDate.now().plusMonths(1);
+
+        return planEndDate;
+    }
+
+    private Plan getPlanTypeFromString(String plan){
+        Plan planType;
+        try{
+            planType=Plan.valueOf(plan.toUpperCase());
+        }catch (Exception ex){
+            throw new SubscriptionException("Invalid Plan Type");
+        }
+        return planType;
     }
 }
