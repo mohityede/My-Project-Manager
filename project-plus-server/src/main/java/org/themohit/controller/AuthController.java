@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.themohit.model.User;
-import org.themohit.request.LoginReq;
+import org.themohit.request.LoginRequest;
 import org.themohit.response.AuthResponse;
 import org.themohit.service.AuthService;
 
@@ -25,8 +25,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> loginUser(@RequestBody LoginReq loginReq){
-        AuthResponse authRes= authService.loginUser(loginReq);
+    public ResponseEntity<AuthResponse> loginUser(@RequestBody LoginRequest loginRequest){
+        AuthResponse authRes= authService.loginUser(loginRequest);
         return new ResponseEntity<>(authRes,HttpStatus.OK);
     }
 }

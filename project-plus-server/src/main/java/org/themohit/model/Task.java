@@ -2,7 +2,10 @@ package org.themohit.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,6 +13,8 @@ import java.util.List;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,10 +31,10 @@ public class Task {
     @ManyToOne
     private User assignee;
 
+    @JsonIgnore
     @ManyToOne
     private Project project;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "task",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Comment> comments=new ArrayList<>();
 }

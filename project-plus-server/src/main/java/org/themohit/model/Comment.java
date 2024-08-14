@@ -1,5 +1,6 @@
 package org.themohit.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -18,6 +19,7 @@ public class Comment {
     @ManyToOne
     private User user;
 
+    @JsonIgnore
     @ManyToOne
     private Task task;
 }

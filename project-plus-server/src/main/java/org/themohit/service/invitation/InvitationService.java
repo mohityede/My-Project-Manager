@@ -2,6 +2,7 @@ package org.themohit.service.invitation;
 
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.themohit.exception.InvitationException;
 import org.themohit.model.Invitation;
@@ -17,6 +18,9 @@ public class InvitationService {
     @Autowired
     private EmailService emailService;
 
+    @Value("${backend.app.url}")
+    private String serverUrl;
+
     public void sendInvitation(String email,long projectId) throws MessagingException {
         String invitationToken= UUID.randomUUID().toString();
 
@@ -27,7 +31,7 @@ public class InvitationService {
 
         invitationRepo.save(invitation);
 
-        String invitationLink="http://localhost:8080/api/v1/project/invite/accept?token="+invitationToken;
+        String invitationLink=serverUrl+"/api/v1/project/invite/accept?token="+invitationToken;
 
         emailService.sendEmailWithToken(email,invitationLink);
     }

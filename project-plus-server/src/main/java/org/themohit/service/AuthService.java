@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.themohit.model.User;
 import org.themohit.repository.UserRepo;
-import org.themohit.request.LoginReq;
+import org.themohit.request.LoginRequest;
 import org.themohit.response.AuthResponse;
 import org.themohit.utils.JwtUtils;
 
@@ -29,6 +29,9 @@ public class AuthService {
     @Autowired
     private CustomUserDetails customUserDetails;
 
+    @Autowired
+    private SubscriptionService subscriptionService;
+
     public AuthResponse createNewUser(User user) throws Exception{
         Optional<User> dbUser= userRepo.findByEmail(user.getEmail());
         if(!dbUser.isEmpty()) throw new InternalAuthenticationServiceException("User Already Exist with email");
@@ -39,6 +42,8 @@ public class AuthService {
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         User savedUser=userRepo.save(newUser);
 
+        subscriptionService.createSubscription(savedUser);
+
         Authentication authentication=new UsernamePasswordAuthenticationToken(user.getEmail(),user.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt= JwtUtils.generateToken(authentication);
@@ -48,9 +53,9 @@ public class AuthService {
         return res;
     }
 
-    public AuthResponse loginUser(LoginReq loginReq) {
-        String username=loginReq.getEmail();
-        String password=loginReq.getPassword();
+    public AuthResponse loginUser(LoginRequest loginRequest) {
+        String username= loginRequest.getEmail();
+        String password= loginRequest.getPassword();
 
         Authentication authentication= authenticate(username,password);
         SecurityContextHolder.getContext().setAuthentication(authentication);

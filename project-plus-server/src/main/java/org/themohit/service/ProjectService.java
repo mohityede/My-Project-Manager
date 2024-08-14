@@ -37,6 +37,7 @@ public class ProjectService {
 
         Chat chat =new Chat();
         chat.setProject(savedProject);
+        chat.setName(project.getName()+" Chats");
 
         Chat newChat= chatService.createChat(chat);
         savedProject.setChat(newChat);
