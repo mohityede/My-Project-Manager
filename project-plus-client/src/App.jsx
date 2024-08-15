@@ -8,6 +8,7 @@ import Subscription from "./pages/Subscription/Subscription";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
 import Auth from "./pages/Auth/Auth";
+import { registerUserUrl } from "./config/api";
 
 const user = false;
 function App() {
