@@ -1,4 +1,3 @@
-import { error } from "console";
 import { GET_USER_REQUEST, GET_USER_SUCCESS, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT, REGISTER_REQUEST, REGISTER_SUCCESS } from "./actionTypes";
 
 const intialState={
@@ -9,7 +8,7 @@ const intialState={
 }
 
 export const authReducer=(state=intialState,action)=>{
-    switch (action) {
+    switch (action.type) {
         case REGISTER_REQUEST:
         case LOGIN_REQUEST:
         case GET_USER_REQUEST:
