@@ -8,14 +8,26 @@ import Subscription from "./pages/Subscription/Subscription";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
 import Auth from "./pages/Auth/Auth";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getUserProfile } from "./redux/auth/action";
+import store from "./redux/store";
 
-const user = true;
+const user = false;
 function App() {
+  const dispatch=useDispatch();
+  const {auth}=useSelector(store=>store)
+  // console.log(auth);
+
+  useEffect(()=>{
+    dispatch(getUserProfile())
+  },[auth.jwt])
+
   return (
     <>
-      {user ? (
+      {(auth.user) ? (
         <div>
-          <BrowserRouter>
+   
             <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />
@@ -26,7 +38,7 @@ function App() {
                 element={<TaskDetails />}
               />
             </Routes>
-          </BrowserRouter>
+        
         </div>
       ) : (
         <Auth />
