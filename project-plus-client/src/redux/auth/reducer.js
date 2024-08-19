@@ -1,25 +1,29 @@
-import { GET_USER_REQUEST, GET_USER_SUCCESS, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT, REGISTER_REQUEST, REGISTER_SUCCESS } from "./actionTypes";
+import * as actionType from "./actionTypes"
 
 const intialState={
     user:null,
     loading:false,
-    error:null,
+    err:null,
     jwt:null,
 }
 
 export const authReducer=(state=intialState,action)=>{
     switch (action.type) {
-        case REGISTER_REQUEST:
-        case LOGIN_REQUEST:
-        case GET_USER_REQUEST:
-            return {...state,loading:true,error:null}
+        case actionType.REGISTER_REQUEST:
+        case actionType.LOGIN_REQUEST:
+        case actionType.GET_USER_REQUEST:
+            return {...state,loading:true,err:null}
             
-        case REGISTER_SUCCESS:
-        case LOGIN_SUCCESS:
-            return {...state,loading:false,error:null,jwt:action.payload.jwt};
-        case GET_USER_SUCCESS:
-            return {...state,loading:false,error:null,user:action.payload};
-        case LOGOUT:
+        case actionType.REGISTER_SUCCESS:
+        case actionType.LOGIN_SUCCESS:
+            return {...state,loading:false,err:null,jwt:action.payload.jwt};
+        case actionType.GET_USER_SUCCESS:
+            return {...state,loading:false,err:null,user:action.payload};
+        case actionType.REGISTER_REQUEST:
+        case actionType.LOGIN_REQUEST:
+        case actionType.GET_USER_REQUEST:
+            return {...state,loading:false,err:action.err}
+        case actionType.LOGOUT:
             return intialState;
         default:
             return state;

@@ -1,5 +1,4 @@
-import { ACCEPT_PROJECT_INVITATION_REQUEST, CREATE_PROJECT_REQUEST, CREATE_PROJECT_SUCCESS, DELETE_PROJECT_REQUEST, DELETE_PROJECT_SUCCESS, GET_PROJECT_BY_ID_REQUEST, GET_PROJECT_BY_ID_SUCCESS, GET_PROJECTS_REQUEST, GET_PROJECTS_SUCCESS, SEARCH_PROJECT_REQUEST, SEARCH_PROJECT_SUCCESS, SEND_PROJECT_INVITATION_REQUEST} from "./actionType";
-
+import * as actionType from "./actionTypes"
 
 const intialState={
     projects:[],
@@ -12,47 +11,47 @@ const intialState={
 
 export const projectReducer=(state=intialState,action)=>{
     switch (action.type) {
-        case GET_PROJECTS_REQUEST:
-        case CREATE_PROJECT_REQUEST:
-        case GET_PROJECT_BY_ID_REQUEST:
-        case SEARCH_PROJECT_REQUEST:
-        case DELETE_PROJECT_REQUEST:
-        case SEND_PROJECT_INVITATION_REQUEST:
-        case ACCEPT_PROJECT_INVITATION_REQUEST:
+        case actionType.GET_PROJECTS_REQUEST:
+        case actionType.CREATE_PROJECT_REQUEST:
+        case actionType.GET_PROJECT_BY_ID_REQUEST:
+        case actionType.SEARCH_PROJECT_REQUEST:
+        case actionType.DELETE_PROJECT_REQUEST:
+        case actionType.SEND_PROJECT_INVITATION_REQUEST:
+        case actionType.ACCEPT_PROJECT_INVITATION_REQUEST:
             return {
                 ...state,
                 loading:true,
                 err:null
             }
-        case GET_PROJECTS_SUCCESS:
+        case actionType.GET_PROJECTS_SUCCESS:
             return {
                 ...state,
                 loading:false,
                 projects:action.projects,
                 err:null
             }
-        case SEARCH_PROJECT_SUCCESS:
+        case actionType.SEARCH_PROJECT_SUCCESS:
             return {
                 ...state,
                 loading:false,
                 searchProjects:action.projects,
                 err:null
             }
-        case CREATE_PROJECT_SUCCESS:
+        case actionType.CREATE_PROJECT_SUCCESS:
             return {
                 ...state,
                 loading:false,
                 projects:[...state.projects,action.project],
                 err:null
             }
-        case GET_PROJECT_BY_ID_SUCCESS:
+        case actionType.GET_PROJECT_BY_ID_SUCCESS:
             return {
                 ...state,
                 loading:false,
                 ProjectDetails:action.project,
                 err:null
             }
-        case DELETE_PROJECT_SUCCESS:
+        case actionType.DELETE_PROJECT_SUCCESS:
             return {
                 ...state,
                 loading:false,
@@ -60,6 +59,18 @@ export const projectReducer=(state=intialState,action)=>{
                 projects: state.projects.filter(
                     (project) => project.id === action.projectId
                 )
+            }
+        case actionType.GET_PROJECTS_FAILURE:
+        case actionType.CREATE_PROJECT_FAILURE:
+        case actionType.GET_PROJECT_BY_ID_FAILURE:
+        case actionType.SEARCH_PROJECT_FAILURE:
+        case actionType.DELETE_PROJECT_FAILURE:
+        case actionType.SEND_PROJECT_INVITATION_FAILURE:
+        case actionType.ACCEPT_PROJECT_INVITATION_FAILURE:
+            return {
+                ...state,
+                loading:false,
+                err:action.err
             }
         default:
             return state;

@@ -22,7 +22,6 @@ function Login() {
   });
 
   const onSubmit = (formData) => {
-    console.log("user data", formData);
     dispatch(login(formData))
     dispatch(getUserProfile())
   };

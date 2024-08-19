@@ -24,7 +24,6 @@ function Signup() {
   const onSubmit = (formData) => {
     dispatch(register(formData))
     dispatch(getUserProfile())
-    console.log("user data", formData);
   };
   return (
     <div className="space-y-5">

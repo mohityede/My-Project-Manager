@@ -1,23 +1,21 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 import ProjectDetails from "./pages/ProjectDetails/ProjectDetails";
 import TaskDetails from "./pages/TaskDetails/TaskDetails";
 import Subscription from "./pages/Subscription/Subscription";
-import Login from "./components/Auth/Login";
-import Signup from "./components/Auth/Signup";
 import Auth from "./pages/Auth/Auth";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getUserProfile } from "./redux/auth/action";
-import store from "./redux/store";
+
 
 const user = false;
 function App() {
   const dispatch=useDispatch();
   const {auth}=useSelector(store=>store)
-  // console.log(auth);
+  console.log(auth);
 
   useEffect(()=>{
     dispatch(getUserProfile())
