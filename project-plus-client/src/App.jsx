@@ -9,23 +9,24 @@ import Auth from "./pages/Auth/Auth";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getUserProfile } from "./redux/auth/action";
+import { getProjects } from "./redux/project/action";
 
 
 const user = false;
 function App() {
   const dispatch=useDispatch();
-  const {auth}=useSelector(store=>store)
+  const {auth,project}=useSelector(store=>store)
   console.log(auth);
 
   useEffect(()=>{
     dispatch(getUserProfile())
+    dispatch(getProjects({}))
   },[auth.jwt])
 
   return (
     <>
       {(auth.user) ? (
-        <div>
-   
+        <div>   
             <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />

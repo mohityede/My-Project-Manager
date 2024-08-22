@@ -6,6 +6,8 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Cross2Icon } from "@radix-ui/react-icons";
+import { useDispatch } from "react-redux";
+import { createNewProject } from "@/redux/project/action";
 
 const tags = [
   "HTML",
@@ -30,6 +32,8 @@ const categories = [
 const isPlusMember=true;
 
 function CreateProjectForm() {
+  const dispatch=useDispatch();
+
   const form = useForm({
     // resolver: z.resolver(),
     defaultValues:{
@@ -41,6 +45,7 @@ function CreateProjectForm() {
   })
 
   const onSubmit=(formData)=>{
+    dispatch(createNewProject(formData))
     console.log("Create project:",formData)
   }
 

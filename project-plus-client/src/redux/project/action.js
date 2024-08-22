@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "@/config/api";
+import api, { API_BASE_URL } from "@/config/api";
 import * as actionType from "./actionTypes"
 
 export const getProjects=({category,tag})=> async(dispatch)=>{
@@ -53,12 +53,12 @@ export const createNewProject=(formData)=> async(dispatch)=>{
     }
 }
 
-export const deleteProject=({id})=> async(dispatch)=>{
+export const deleteProject=(id)=> async(dispatch)=>{
     dispatch({type:actionType.DELETE_PROJECT_REQUEST})
     try {
         const {data}=await api.delete(`${API_BASE_URL}/project/${id}`)
         console.log("delete project",data)
-        dispatch({type:actionType.DELTE_PROJECT_SUCCESS,projectId:id})
+        dispatch({type:actionType.DELETE_PROJECT_SUCCESS,projectId:id})
     } catch (err) {
         console.log(err)
         dispatch({type:actionType.DELETE_PROJECT_FAILURE,err:err.message})

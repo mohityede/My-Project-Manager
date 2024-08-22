@@ -57,7 +57,7 @@ export const projectReducer=(state=intialState,action)=>{
                 loading:false,
                 err:null,
                 projects: state.projects.filter(
-                    (project) => project.id === action.projectId
+                    (project) => project.id !== action.projectId
                 )
             }
         case actionType.GET_PROJECTS_FAILURE:
