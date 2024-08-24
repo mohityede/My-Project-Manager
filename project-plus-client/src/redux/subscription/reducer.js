@@ -3,7 +3,8 @@ import * as actionType from "./actionTypes"
 const intialState={
     loading:false,
     err:null,
-    userSubscription:null
+    userSubscription:null,
+    paymentUrl:null
 }
 
 export const subscriptionReducer=(state=intialState,action)=>{
@@ -11,6 +12,7 @@ export const subscriptionReducer=(state=intialState,action)=>{
 
         case actionType.GET_USER_SUBSCRIPTION_REQUEST:
         case actionType.UPGRADE_SUBSCRIPTION_REQUEST:
+        case actionType.PAY_REQUEST:
             return {
                 ...state,
                 loading:true,
@@ -24,8 +26,16 @@ export const subscriptionReducer=(state=intialState,action)=>{
                 err:null,
                 userSubscription:action.payload
             }
+        case actionType.PAY_SUCCESS:
+            return {
+                ...state,
+                loading:false,
+                err:null,
+                paymentUrl:action.payload.link
+            }
         case actionType.GET_USER_SUBSCRIPTION_FAILURE:
         case actionType.UPGRADE_SUBSCRIPTION_FAILURE:
+        case actionType.PAY_FAILURE:
             return{
                 ...state,
                 loading:false,

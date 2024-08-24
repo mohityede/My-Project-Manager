@@ -1,7 +1,15 @@
 import { CheckIcon } from "@radix-ui/react-icons"
 import { Button } from "../ui/button"
+import { useDispatch } from "react-redux"
+import { payPrice, upgradeSubscription } from "@/redux/subscription/action";
 
-function SubscriptionCard({data}){
+function SubscriptionCard({data,currPlan}){
+    const dispatch=useDispatch();
+    const handleUpgradePlan = (planType,cost)=>{
+        console.log("payling now:",planType,cost)
+        dispatch(payPrice(planType,cost))
+    }
+    
     return(
         <div className="rounded-xl bg-primary text-white shadow-slate-800 shadow-2xl
         card p-5 space-y-5 w-[18rem]">
@@ -14,7 +22,10 @@ function SubscriptionCard({data}){
                 data.planType==="Annual Paid Plan" &&
                 <span className="text-green-400 font-bold">25% Off</span>
             }
-            <Button className="w-full bg-white text-primary hover:text-white hover:border-white hover:border">
+            <Button 
+            disable
+            onClick={()=> handleUpgradePlan(data.planType.split(" ")[0],data.price)}
+            className="w-full bg-white text-primary hover:text-white hover:border-white hover:border">
                 {data.buttonName}
             </Button>
             <div>
