@@ -3,8 +3,11 @@ import { DialogClose } from "../ui/dialog"
 import { Button } from "../ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
+import { useDispatch } from "react-redux";
+import { inviteUser } from "@/redux/project/action";
 
-function InviteUserForm() {
+function InviteUserForm({projectId}) {
+  const dispatch=useDispatch();
   const form=useForm({
     defaultValues:{
       email:""
@@ -13,6 +16,7 @@ function InviteUserForm() {
 
   const onSubmit=(formData)=>{
     console.log("invite user data",formData)
+    dispatch(inviteUser({email:formData.email,projectId}))
   }
   return (
     <>

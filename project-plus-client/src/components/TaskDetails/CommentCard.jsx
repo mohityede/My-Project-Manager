@@ -3,15 +3,14 @@ import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Button } from "../ui/button";
 import { useDispatch } from "react-redux";
 import { deleteTaskComment } from "@/redux/comment/action";
+import { getFallback } from "@/utils/utils";
 
 function CommentCard({item}) {
   const dispatch=useDispatch();
   const handlerDeleteComment = ()=>{
     dispatch(deleteTaskComment(item.id))
   }
-  const getFallback = (name)=>{
-    return name.split(" ")[0][0]+name.split(" ")[1][0]
-  }
+  
   return (
     <>
       <div className="flex justify-between">

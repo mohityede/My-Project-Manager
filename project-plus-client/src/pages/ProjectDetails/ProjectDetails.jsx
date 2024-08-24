@@ -12,19 +12,21 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getProjectById } from "@/redux/project/action"
 import { useParams } from "react-router-dom"
+import { getChat } from "@/redux/chat/action"
 
 const users=["MY","TC","SB","AY","KP","JP"]
 const projectStatus="In Progress"
 
 function ProjectDetails() {
   const dispatch=useDispatch();
-  const {project}=useSelector(store => store)
+  const {project,auth}=useSelector(store => store)
   const {id}=useParams();
   const handleProjectInvitation = ()=>{
     console.log("inviteed")
   }
 
   useEffect(()=>{
+    dispatch(getChat(id))
     dispatch(getProjectById(id))
   },[id])
 
@@ -67,17 +69,17 @@ function ProjectDetails() {
                       <DialogClose>
                       <Avatar className="cursor-pointer ">
                             <AvatarImage src="" alt="@shadcn" />
-                            <AvatarFallback>{users.length-4}+</AvatarFallback>
+                            <AvatarFallback>{project.projectDetails.members.length-4}+</AvatarFallback>
                           </Avatar>                   
                       </DialogClose>
                     </DialogTrigger>
-                    <DialogOverlay>
+                    {/* <DialogOverlay>
                       <DialogContent>
                         <DialogTitle>Project members:</DialogTitle>
                         <MembersTable users={users}/>
                         <DialogDescription>All the project users are listed here</DialogDescription>
                       </DialogContent>
-                    </DialogOverlay>                    
+                    </DialogOverlay>                     */}
                   </Dialog>
                   }
                 </div>
@@ -93,7 +95,7 @@ function ProjectDetails() {
                     </DialogTrigger>
                     <DialogContent>
                       <DialogTitle>Invite User</DialogTitle>
-                      <InviteUserForm/>
+                      <InviteUserForm projectId={project.projectDetails.id}/>
                       <DialogDescription>Please fill valid email address to invite user</DialogDescription>
                     </DialogContent>
                   </Dialog>
@@ -123,7 +125,7 @@ function ProjectDetails() {
           </section>
         </ScrollArea>
         <div className="lg:w-[30%] rounded-md sticky right-5 top-10">
-          <ChatBox/>
+          <ChatBox projectId={project.projectDetails.id} user={auth.user}/>
         </div>
       </div>
     </div>

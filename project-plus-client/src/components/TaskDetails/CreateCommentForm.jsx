@@ -7,6 +7,7 @@ import { Avatar, AvatarFallback } from "../ui/avatar";
 import { useDispatch } from "react-redux";
 import { number } from "zod";
 import { createNewComment } from "@/redux/comment/action";
+import { getFallback } from "@/utils/utils";
 
 function CreateCommentForm({ taskId,user }) {
   const dispatch=useDispatch();
@@ -18,9 +19,7 @@ function CreateCommentForm({ taskId,user }) {
     console.log("taskComment", data);
     dispatch(createNewComment(data));
   };
-  const getFallback = (name)=>{
-    return name.split(" ")[0][0]+name.split(" ")[1][0]
-  }
+  
   return (
     <>
       <div>

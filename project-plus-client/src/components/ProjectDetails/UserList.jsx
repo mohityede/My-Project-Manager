@@ -2,6 +2,7 @@ import { Avatar } from "@radix-ui/react-avatar";
 import { AvatarFallback } from "../ui/avatar";
 import { useDispatch, useSelector } from "react-redux";
 import { assignTaskToUser } from "@/redux/task/action";
+import { getFallback } from "@/utils/utils";
 
 function UserList({item}) {
   const {project}=useSelector(store => store)
@@ -13,14 +14,12 @@ function UserList({item}) {
     dispatch(assignTaskToUser({taskId:item.id,userId}))
   }
 
-  const getFallback = (name)=>{
-    return name.split(" ")[0][0]+name.split(" ")[1][0]
-  }
+
   return (
     <>
       <div className="space-y-2">
         <div className="border rounded-md">
-          <span className="py-2 px-3">{ item.assignee.fullName || "Unassigned"}</span>
+          <span className="py-2 px-3">{ item.assignee?.fullName || "Unassigned"}</span>
         </div>
         {project.projectDetails.members.map(user => 
           <div

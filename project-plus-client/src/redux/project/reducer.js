@@ -58,7 +58,12 @@ export const projectReducer=(state=intialState,action)=>{
                 err:null,
                 projects: state.projects.filter(
                     (project) => project.id !== action.projectId
-                )
+                )}
+        case actionType.SEND_PROJECT_INVITATION_SUCCESS:
+            return {
+                ...state,
+                loading:false,
+                err:null
             }
         case actionType.GET_PROJECTS_FAILURE:
         case actionType.CREATE_PROJECT_FAILURE:
