@@ -4,14 +4,23 @@ import { Input } from "../ui/input";
 import { DialogClose } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { Avatar, AvatarFallback } from "../ui/avatar";
+import { useDispatch } from "react-redux";
+import { number } from "zod";
+import { createNewComment } from "@/redux/comment/action";
 
-function CreateCommentForm({ taskId }) {
+function CreateCommentForm({ taskId,user }) {
+  const dispatch=useDispatch();
   const form = useForm({
     comment: "",
   });
   const onSubmit = (data) => {
+    data.taskId=Number(taskId);
     console.log("taskComment", data);
+    dispatch(createNewComment(data));
   };
+  const getFallback = (name)=>{
+    return name.split(" ")[0][0]+name.split(" ")[1][0]
+  }
   return (
     <>
       <div>
@@ -25,7 +34,7 @@ function CreateCommentForm({ taskId }) {
 									<div className="flex gap-2">
 										<div>
 											<Avatar>
-												<AvatarFallback>MY</AvatarFallback>
+												<AvatarFallback>{getFallback(user.fullName)}</AvatarFallback>
 											</Avatar>
 										</div>
 										<FormControl>

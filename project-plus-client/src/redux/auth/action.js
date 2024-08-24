@@ -49,6 +49,6 @@ export const getUserProfile=() => async(dispatch)=>{
 }
 
 export const logout=()=>async(dispatch)=>{
-    dispatch({type:LOGOUT})
+    dispatch({type:actionType.LOGOUT})
     localStorage.clear();
 }

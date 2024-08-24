@@ -21,14 +21,14 @@ export const commentReducer=(state=intialState,action)=>{
                 ...state,
                 loading:false,
                 err:null,
-                comments:[...state.comments,action.payload]
+                comments:[action.payload,...state.comments]
             }
         case actionType.GET_COMMENTS_SUCCESS:
             return{
                 ...state,
                 loading:false,
                 err:null,
-                comments:action.payload
+                comments:action.payload.reverse()
             }
         case actionType.DELETE_COMMENT_SUCCESS:
             return{

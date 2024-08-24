@@ -24,7 +24,7 @@ function ProjectCard({projectData}) {
           <div className="space-y-2">
             <div className="flex justify-between">
               <div className="flex items-center gap-5">
-                <h1 onClick={()=>navigate("/project/3")} className="cursor-pointer font-bold text-lg font-mono">
+                <h1 onClick={()=>navigate("/project/"+projectData.id)} className="cursor-pointer font-bold text-lg font-mono">
                   {projectData.name}
                 </h1>
                 <DividerVerticalIcon />

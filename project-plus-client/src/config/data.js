@@ -20,3 +20,9 @@ export const tags = [
     "PHP",
     "Rust",
   ]
+
+export const priorities=[
+  "High",
+  "Medium",
+  "Low"
+]

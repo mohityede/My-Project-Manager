@@ -56,8 +56,15 @@ export const taskReducer=(state=intialState,action)=>{
                 ...state,
                 loading:false,
                 err:null,
-                taskDetails:action.payload
+                taskDetails:action.payload,
             }     
+        case actionType.DELETE_TASK_SUCCESS:
+            return{
+                ...state,
+                loading:false,
+                err:null,
+                tasks:state.tasks.filter(task => task.id !== action.taskId)
+            }
         case actionType.GET_TASKS_FOR_PROJECT_FAILURE:
         case actionType.ASSIGN_TASK_FAILURE:
         case actionType.CREATE_TASK_FAILURE:

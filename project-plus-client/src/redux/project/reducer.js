@@ -4,7 +4,7 @@ const intialState={
     projects:[],
     loading:false,
     err:null,
-    ProjectDetails:null,
+    projectDetails:null,
     searchProjects:[],
     chat:null
 }
@@ -48,7 +48,7 @@ export const projectReducer=(state=intialState,action)=>{
             return {
                 ...state,
                 loading:false,
-                ProjectDetails:action.project,
+                projectDetails:action.project,
                 err:null
             }
         case actionType.DELETE_PROJECT_SUCCESS:

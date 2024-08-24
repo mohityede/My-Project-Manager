@@ -8,50 +8,66 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogOverlay, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { PlusIcon } from "@radix-ui/react-icons"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { getProjectById } from "@/redux/project/action"
+import { useParams } from "react-router-dom"
 
 const users=["MY","TC","SB","AY","KP","JP"]
 const projectStatus="In Progress"
 
 function ProjectDetails() {
+  const dispatch=useDispatch();
+  const {project}=useSelector(store => store)
+  const {id}=useParams();
   const handleProjectInvitation = ()=>{
     console.log("inviteed")
   }
+
+  useEffect(()=>{
+    dispatch(getProjectById(id))
+  },[id])
+
   return (
     <>
+    {
+      (project.loading || project.projectDetails===null) ? <h1>Loading...</h1>:
     <div className="m-5 lg:px-10">
       <div className="lg:flex gap-5 justify-between pb-4">
         <ScrollArea className="h-screen lg:w-[69%] pr-2">
           <div className="pb-10 w-full">
-            <h1 className="pb-5 font-bold text-2xl font-mono">Project Name</h1>
+            <h1 className="pb-5 font-bold text-2xl font-mono">{project.projectDetails.name}</h1>
             <div className="space-y-5 pb-10">
               <p className="w-full md:max-w-lg lg:max-w-xl text-sm font-thin">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde repellendus laudantium dolores tenetur doloribus ea beatae cumque porro! Assumenda mollitia earum necessitatibus perferendis modi repudiandae. Aliquam, nulla? Voluptas, odio. Ducimus.
+                {project.projectDetails.description}
               </p>
               <div className="flex">
                 <span className="w-36">Created by:</span>
-                <span className="font-semibold">Mohit Yede</span>
+                <span className="font-semibold">{project.projectDetails.owner.fullName.toUpperCase()}</span>
               </div>
               <div className="flex">
                 <span className="w-36">Category:</span>
-                <span className="font-semibold">Fullstack</span>
+                <span className="font-semibold">{project.projectDetails.category.toUpperCase()}</span>
               </div>
               <div className="flex">
                 <span className="w-36">Members:</span>
                 <div className="flex flex-wrap items-center gap-2">
                   {
-                    users.slice(0,4).map((member)=>
+                    project.projectDetails.members.slice(0,4).map((member)=>
                       <Avatar key={member} className="cursor-pointer ">
                         <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                        <AvatarFallback>CN</AvatarFallback>
+                        <AvatarFallback>US</AvatarFallback>
                       </Avatar>
                     )
                   }
+                  {
+                    project.projectDetails.members.length > 4 &&
                   <Dialog>
                     <DialogTrigger>
                       <DialogClose>
                       <Avatar className="cursor-pointer ">
                             <AvatarImage src="" alt="@shadcn" />
-                            <AvatarFallback>{users.length-2}+</AvatarFallback>
+                            <AvatarFallback>{users.length-4}+</AvatarFallback>
                           </Avatar>                   
                       </DialogClose>
                     </DialogTrigger>
@@ -61,9 +77,9 @@ function ProjectDetails() {
                         <MembersTable users={users}/>
                         <DialogDescription>All the project users are listed here</DialogDescription>
                       </DialogContent>
-                    </DialogOverlay>
-                    
+                    </DialogOverlay>                    
                   </Dialog>
+                  }
                 </div>
                 <div>
                   <Dialog>
@@ -83,7 +99,7 @@ function ProjectDetails() {
                   </Dialog>
                 </div>
               </div>
-              <div className="flex">
+              {/* <div className="flex">
                 <span className="w-36">Status:</span>                
                 {
                   projectStatus==="In Progress" && (<Badge className="bg-yellow-600">{projectStatus}</Badge>)
@@ -94,15 +110,15 @@ function ProjectDetails() {
                 {
                   projectStatus==="Aborted" && (<Badge className="bg-red-700">{projectStatus}</Badge>)
                 }                
-              </div>
+              </div> */}
             </div>
           </div>
           <section>
             <span className="py-5 border-b text-xl font-mono">Task</span>
             <div className="lg:flex md:flex gap-3 justify-between py-5">
-              <TaskList status="pending" title="Todo List"/>
+              <TaskList status="todo" title="Todo List"/>
               <TaskList status="in_progress" title="In Progress"/>
-              <TaskList status="completed" title="Done"/>              
+              <TaskList status="done" title="Done"/>              
             </div>
           </section>
         </ScrollArea>
@@ -111,6 +127,7 @@ function ProjectDetails() {
         </div>
       </div>
     </div>
+    }
     </>
   )
 }
