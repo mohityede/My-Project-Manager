@@ -21,9 +21,9 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createNewTask } from "@/redux/task/action";
 
-function CreateTaskForm({status}) {
-  const dispatch=useDispatch();
-  const {id}=useParams()
+function CreateTaskForm({ status }) {
+  const dispatch = useDispatch();
+  const { id } = useParams();
   const form = useForm({
     defaultValues: {
       title: "",
@@ -31,14 +31,13 @@ function CreateTaskForm({status}) {
       dueDate: null,
       priority: "",
       status,
-      forProjectId:Number(id)
+      forProjectId: Number(id),
     },
   });
-  const today=new Date().toISOString().split('T')[0]
+  const today = new Date().toISOString().split("T")[0];
 
   const onSubmit = (formData) => {
-    console.log("create task data", formData);
-    dispatch(createNewTask(formData))
+    dispatch(createNewTask(formData));
   };
   return (
     <>

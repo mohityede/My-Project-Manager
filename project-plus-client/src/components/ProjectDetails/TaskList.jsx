@@ -23,7 +23,7 @@ import { useParams } from "react-router-dom";
 
 function TaskList({ status, title }) {
   const dispatch = useDispatch();
-  const { task,user } = useSelector((store) => store);
+  const { task, user } = useSelector((store) => store);
   const { id } = useParams();
 
   useEffect(() => {

@@ -5,9 +5,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -20,10 +18,8 @@ import { useParams } from "react-router-dom";
 
 function TaskDetails() {
   const dispatch = useDispatch();
-  const { projectId, taskId } = useParams();
-  const { task, comment,auth } = useSelector((store) => store);
-  console.log("TASK:", task);
-  console.log("COMMENT:", comment);
+  const { taskId } = useParams();
+  const { task, comment, auth } = useSelector((store) => store);
 
   useEffect(() => {
     dispatch(getTaskById(taskId));
@@ -32,14 +28,9 @@ function TaskDetails() {
 
   const updateTaskStatusHandler = (status) => {
     dispatch(updateTaskStatus({ taskId: taskId, status }));
-    console.log("updated");
   };
   return (
     <>
-      {/* <div className="px-20 py-2">
-				<div className="flex justify-between p-10 rounded-lg">
-					<ScrollArea className="h-[80vh] w-[60%]"> */}
-
       {task.loading || task.taskDetails == null ? (
         <h1>Loading...</h1>
       ) : (
@@ -82,7 +73,7 @@ function TaskDetails() {
             <div className="lg:w-[30%] w-full space-y-2">
               <Select onValueChange={updateTaskStatusHandler}>
                 <SelectTrigger className="w-[180px] border border-primary bg-white">
-                  <SelectValue placeholder={task.taskDetails.status}/>
+                  <SelectValue placeholder={task.taskDetails.status} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem

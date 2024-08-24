@@ -2,7 +2,7 @@ import { useState } from "react";
 import Login from "../../components/Auth/Login";
 import Signup from "../../components/Auth/Signup";
 import { Button } from "@/components/ui/button";
-  
+
 function Auth() {
   const [isLogin, setIsLogin] = useState(false);
 

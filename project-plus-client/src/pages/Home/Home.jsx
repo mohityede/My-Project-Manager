@@ -1,14 +1,11 @@
-import { Card } from "@/components/ui/card"
-import ProjectList from "../ProjectList/ProjectList"
-import Navbar from "@/components/Navbar/Navbar"
+import ProjectList from "../ProjectList/ProjectList";
 
 function Home() {
-
   return (
     <>
-      <ProjectList/>
+      <ProjectList />
     </>
-  )
+  );
 }
 
-export default Home
+export default Home;

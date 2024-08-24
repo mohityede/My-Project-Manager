@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 import Home from "./pages/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 import ProjectDetails from "./pages/ProjectDetails/ProjectDetails";
@@ -14,36 +13,35 @@ import UpgradeSuccess from "./pages/Subscription/UgradeSuccess";
 import UpgradeFail from "./pages/Subscription/UpgradeFail";
 import AcceptInvite from "./pages/ProjectDetails/AcceptInvite";
 
-
-const user = false;
 function App() {
-  const dispatch=useDispatch();
-  const {auth,project}=useSelector(store=>store)
-  console.log(auth);
+  const dispatch = useDispatch();
+  const { auth } = useSelector((store) => store);
 
-  useEffect(()=>{
-    dispatch(getUserProfile())
-    dispatch(getProjects({}))
-  },[auth.jwt])
+  useEffect(() => {
+    dispatch(getUserProfile());
+    dispatch(getProjects({}));
+  }, [auth.jwt]);
 
   return (
     <>
-      {(auth.user) ? (
-        <div>   
-            <Navbar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/upgrade" element={<Subscription />} />
-              <Route path="/project/:id" element={<ProjectDetails />} />
-              <Route path="/upgrade/success/:planType" element={<UpgradeSuccess />} />
-              <Route path="/upgrade/fail" element={<UpgradeFail />} />
-              <Route path="/invite/accept" element={<AcceptInvite />} />
-              <Route
-                path="/project/:projectId/task/:taskId"
-                element={<TaskDetails />}
-              />
-            </Routes>
-        
+      {auth.user ? (
+        <div>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/upgrade" element={<Subscription />} />
+            <Route path="/project/:id" element={<ProjectDetails />} />
+            <Route
+              path="/upgrade/success/:planType"
+              element={<UpgradeSuccess />}
+            />
+            <Route path="/upgrade/fail" element={<UpgradeFail />} />
+            <Route path="/invite/accept" element={<AcceptInvite />} />
+            <Route
+              path="/project/:projectId/task/:taskId"
+              element={<TaskDetails />}
+            />
+          </Routes>
         </div>
       ) : (
         <Auth />

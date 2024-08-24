@@ -5,12 +5,12 @@ import { useDispatch } from "react-redux";
 import { deleteTaskComment } from "@/redux/comment/action";
 import { getFallback } from "@/utils/utils";
 
-function CommentCard({item}) {
-  const dispatch=useDispatch();
-  const handlerDeleteComment = ()=>{
-    dispatch(deleteTaskComment(item.id))
-  }
-  
+function CommentCard({ item }) {
+  const dispatch = useDispatch();
+  const handlerDeleteComment = () => {
+    dispatch(deleteTaskComment(item.id));
+  };
+
   return (
     <>
       <div className="flex justify-between">
@@ -23,7 +23,12 @@ function CommentCard({item}) {
             <p>{item.content}</p>
           </div>
         </div>
-        <Button onClick={() => handlerDeleteComment()} varient="outline" size="sm" className="rounded-full">
+        <Button
+          onClick={() => handlerDeleteComment()}
+          varient="outline"
+          size="sm"
+          className="rounded-full"
+        >
           <TrashIcon />
         </Button>
       </div>
