@@ -3,7 +3,7 @@ import { Button } from "../ui/button"
 import { useDispatch } from "react-redux"
 import { payPrice, upgradeSubscription } from "@/redux/subscription/action";
 
-function SubscriptionCard({data,currPlan}){
+function SubscriptionCard({data}){
     const dispatch=useDispatch();
     const handleUpgradePlan = (planType,cost)=>{
         console.log("payling now:",planType,cost)
@@ -23,7 +23,7 @@ function SubscriptionCard({data,currPlan}){
                 <span className="text-green-400 font-bold">25% Off</span>
             }
             <Button 
-            disable
+            disabled={(data.price==0 || data.buttonName==="Current Plan")}
             onClick={()=> handleUpgradePlan(data.planType.split(" ")[0],data.price)}
             className="w-full bg-white text-primary hover:text-white hover:border-white hover:border">
                 {data.buttonName}

@@ -22,11 +22,6 @@ function UpgradeSuccess() {
                 <CheckCircledIcon className="h-9 w-9 text-green-500"/>
                 <p className="font-bold text-xl font-mono">Plan Upgraded Successfully</p>
             </div>
-            <div className="space-y-3">
-                <p className="text-green-500" >Start Date:</p>
-                <p className="text-red-500">End Date:</p>
-                <p className="text-yellow-500">Plan Type:</p>
-            </div>
             <span className="text-gray-500">Do not refresh page</span>
             <Button onClick={()=> handleClaim()} >Claim Subscription</Button>
         </Card>

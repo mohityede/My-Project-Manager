@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getProjectById } from "@/redux/project/action"
 import { useParams } from "react-router-dom"
 import { getChat } from "@/redux/chat/action"
+import { getFallback } from "@/utils/utils"
 
 const users=["MY","TC","SB","AY","KP","JP"]
 const projectStatus="In Progress"
@@ -56,9 +57,9 @@ function ProjectDetails() {
                 <div className="flex flex-wrap items-center gap-2">
                   {
                     project.projectDetails.members.slice(0,4).map((member)=>
-                      <Avatar key={member} className="cursor-pointer ">
+                      <Avatar key={member.id} className="cursor-pointer ">
                         <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                        <AvatarFallback>US</AvatarFallback>
+                        <AvatarFallback>{getFallback(member.fullName)}</AvatarFallback>
                       </Avatar>
                     )
                   }

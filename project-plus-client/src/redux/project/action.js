@@ -79,9 +79,9 @@ export const inviteUser=({email,projectId})=> async(dispatch)=>{
 
 export const acceptProjectInvitation=({inviteToken,navigate})=> async(dispatch)=>{
     dispatch({type:actionType.ACCEPT_PROJECT_INVITATION_REQUEST})
-    try {9888
-        const {data}=await api.get(`${API_BASE_URL}/project/accept?token=${inviteToken}`)
-        navigate("/project"+data.projectId)
+    try {
+        const {data}=await api.get(`${API_BASE_URL}/project/invite/accept?token=${inviteToken}`)
+        navigate("/project/"+data.projectId)
         console.log("accept project invite",data)
         dispatch({type:actionType.ACCEPT_PROJECT_INVITATION_SUCCESS})
     } catch (err) {

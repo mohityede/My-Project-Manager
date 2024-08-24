@@ -12,6 +12,7 @@ import { getUserProfile } from "./redux/auth/action";
 import { getProjects } from "./redux/project/action";
 import UpgradeSuccess from "./pages/Subscription/UgradeSuccess";
 import UpgradeFail from "./pages/Subscription/UpgradeFail";
+import AcceptInvite from "./pages/ProjectDetails/AcceptInvite";
 
 
 const user = false;
@@ -36,6 +37,7 @@ function App() {
               <Route path="/project/:id" element={<ProjectDetails />} />
               <Route path="/upgrade/success/:planType" element={<UpgradeSuccess />} />
               <Route path="/upgrade/fail" element={<UpgradeFail />} />
+              <Route path="/invite/accept" element={<AcceptInvite />} />
               <Route
                 path="/project/:projectId/task/:taskId"
                 element={<TaskDetails />}
