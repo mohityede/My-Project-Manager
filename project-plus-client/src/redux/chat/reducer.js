@@ -35,6 +35,7 @@ export const chatReducer = (state = intialState, action) => {
         ...state,
         loading: false,
         chat: action.payload,
+        messages: action.payload.messages.reverse()
       };
 
     case actionType.GET_MESSAGES_FAILURE:

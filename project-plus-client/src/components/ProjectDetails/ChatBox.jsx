@@ -39,7 +39,7 @@ function ChatBox({ user }) {
       <div className="sticky mt-5 lg:mt:0 lg:border lg:border-l-gray-400">
         <div className="border rounded-lg">
           <h1 className="border-b p-5 font-mono text-xl"> Chat Box</h1>
-          <ScrollArea className="h-[32rem] w-full p-2 flex gap-3 flex-col">
+          <ScrollArea className="h-[32rem] w-full p-2 flex gap-3 overflow-y-auto flex-col">
             {chat.chat?.messages.map((msg) =>
               msg.sender?.id !== user?.id ? (
                 <div key={msg.id} className="flex gap-2 mb-2 justify-start">
@@ -50,7 +50,9 @@ function ChatBox({ user }) {
                   </Avatar>
                   <div className="py-2 font-thin px-5 bg-white border rounded-ss-2xl rounde rounded-e-xl">
                     <p>{msg.sender.fullName}</p>
-                    <p className="font-bold">{msg.content}</p>
+                    <p className="font-bold w-max max-w-xs break-words">
+                      {msg.content}
+                    </p>
                   </div>
                 </div>
               ) : (
@@ -60,7 +62,9 @@ function ChatBox({ user }) {
                   rounded rounded-s-xl"
                   >
                     <p>{msg.sender.fullName}</p>
-                    <p className="text-white font-bold">{msg.content}</p>
+                    <p className="text-white font-bold w-max max-w-xs break-words ">
+                      {msg.content}
+                    </p>
                   </div>
                   <Avatar>
                     <AvatarFallback>
