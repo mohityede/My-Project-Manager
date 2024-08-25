@@ -7,9 +7,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { getUserProfile, register } from "@/redux/auth/action";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 
 function Signup() {
+  const dispatch = useDispatch();
   const form = useForm({
     defaultValues: {
       email: "",
@@ -19,7 +22,8 @@ function Signup() {
   });
 
   const onSubmit = (formData) => {
-    console.log("user data", formData);
+    dispatch(register(formData));
+    dispatch(getUserProfile());
   };
   return (
     <div className="space-y-5">
@@ -63,7 +67,6 @@ function Signup() {
           <FormField
             control={form.control}
             name="password"
-            type="password"
             render={({ field }) => (
               <FormItem>
                 <FormControl>

@@ -7,9 +7,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { getUserProfile, login } from "@/redux/auth/action";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 
 function Login() {
+  const dispatch = useDispatch();
   const form = useForm({
     defaultValues: {
       email: "",
@@ -18,7 +21,8 @@ function Login() {
   });
 
   const onSubmit = (formData) => {
-    console.log("user data", formData);
+    dispatch(login(formData));
+    dispatch(getUserProfile());
   };
   return (
     <div className="space-y-5">
