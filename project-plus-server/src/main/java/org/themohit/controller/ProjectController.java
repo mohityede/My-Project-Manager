@@ -32,11 +32,11 @@ public class ProjectController {
     @GetMapping("")
     public ResponseEntity<List<Project>> getMyProjects(
             @RequestParam(required = false) String category,
-            @RequestParam(required = false) String tags,
+            @RequestParam(required = false) String tag,
             @RequestHeader(ConfigConstants.JWT_HEADER) String jwt
     ) throws Exception {
         User user= userService.getUserProfileByJwt(jwt);
-        List<Project> projects=projectService.getProjectByUser(user,category,tags);
+        List<Project> projects=projectService.getProjectByUser(user,category,tag);
         return new ResponseEntity<>(projects,HttpStatus.OK);
     }
 

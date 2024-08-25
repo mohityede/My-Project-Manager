@@ -22,10 +22,11 @@ public class PaymentController {
     @GetMapping("/pay")
     public ResponseEntity<PaymentLinkResponse> createPaymentLink(
             @RequestParam long amount,
+            @RequestParam String planType,
             @RequestHeader(ConfigConstants.JWT_HEADER) String jwt
     ) throws Exception {
         User user = userService.getUserProfileByJwt(jwt);
-        String paymentLink= paymentService.createPaymentLink(amount,user.getEmail());
+        String paymentLink= paymentService.createPaymentLink(amount,user.getEmail(),planType);
         PaymentLinkResponse res=new PaymentLinkResponse();
         res.setLink(paymentLink);
         res.setUserEmail(user.getEmail());
