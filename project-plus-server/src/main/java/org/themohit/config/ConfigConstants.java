@@ -21,6 +21,7 @@ public class ConfigConstants {
             "http://localhost:5173/",
             "http://localhost:3000/",
             frontend,
-            backend
+            backend,
+            "https://project-plus-beta.vercel.app/"
     );
 }
