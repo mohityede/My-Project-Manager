@@ -18,8 +18,8 @@ public class InvitationService {
     @Autowired
     private EmailService emailService;
 
-    @Value("${backend.app.url}")
-    private String serverUrl;
+    @Value("${frontend.app.url}")
+    private String clientUrl;
 
     public void sendInvitation(String email,long projectId) throws MessagingException {
         String invitationToken= UUID.randomUUID().toString();
@@ -31,7 +31,7 @@ public class InvitationService {
 
         invitationRepo.save(invitation);
 
-        String invitationLink=serverUrl+"/api/v1/project/invite/accept?token="+invitationToken;
+        String invitationLink=clientUrl+"/invite/accept?token="+invitationToken;
 
         emailService.sendEmailWithToken(email,invitationLink);
     }

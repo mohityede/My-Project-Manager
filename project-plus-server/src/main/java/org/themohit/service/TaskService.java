@@ -51,6 +51,7 @@ public class TaskService {
         newTask.setForProjectId(taskReq.getForProjectId());
         newTask.setStatus(taskReq.getStatus());
         newTask.setProject(project);
+        newTask.setAssignee(taskReq.getAssignee());
 
         return taskRepo.save(newTask);
     }

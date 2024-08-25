@@ -19,14 +19,14 @@ public class StripePaymentService {
     @Value("${frontend.app.url}")
     private String clientUrl;
 
-    public String createPaymentLink(long amount,String userEmail) throws StripeException {
+    public String createPaymentLink(long amount,String userEmail,String planType) throws StripeException {
         Stripe.apiKey=apiKey;
 
         SessionCreateParams sessionParams= SessionCreateParams.builder()
                 .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
                 .setMode(SessionCreateParams.Mode.PAYMENT)
-                .setSuccessUrl(clientUrl+"/payment/success")
-                .setCancelUrl(clientUrl+"/payment/fail")
+                .setSuccessUrl(clientUrl+"/upgrade/success/"+planType)
+                .setCancelUrl(clientUrl+"/upgrade/fail")
                 .setCustomerEmail(userEmail)
                 .addLineItem(
                         SessionCreateParams.LineItem.builder()

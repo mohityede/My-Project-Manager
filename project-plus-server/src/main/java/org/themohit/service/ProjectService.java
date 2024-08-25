@@ -43,7 +43,7 @@ public class ProjectService {
         savedProject.setChat(newChat);
 
         if(savedProject==null) throw new ProjectServiceException("Project not saved! some internal server issue...");
-        return project;
+        return savedProject;
     }
 
     public Project getProjectById(long projectId){
@@ -54,15 +54,14 @@ public class ProjectService {
 
     public List<Project> getProjectByUser(User user,String category,String tag){
         List<Project> projects=projectRepo.findByMembersContainingOrOwner(user,user).get();
-
         if(category!=null){
             projects=projects.stream().filter(project -> project.getCategory()
-                    .equals(category))
+                            .equalsIgnoreCase(category))
                     .collect(Collectors.toList());
         }
         if(tag!=null){
             projects=projects.stream().filter(project -> project.getTags()
-                    .contains(tag))
+                            .stream().anyMatch(t -> t.equalsIgnoreCase(tag)))
                     .collect(Collectors.toList());
         }
         return projects;
